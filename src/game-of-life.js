@@ -23,9 +23,7 @@ const gameOfLife = (arr) => {
   let result = [];
 
   for (let i = 0; i < arr.length; i++) {
-    if (result[i] === undefined) {
-      result[i] = [];
-    }
+    result[i] = [];
 
     for (let j = 0; j < arr[i].length; j++) {
       const numberOfLivingNeighbours = countAliveNeighbours(arr, i, j);

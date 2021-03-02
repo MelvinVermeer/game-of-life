@@ -10,8 +10,7 @@ const relativeNeighbours = [
 ];
 
 const countAliveNeighbours = (arr, i, j) =>
-  relativeNeighbours.filter(([ii, jj]) => arr[i + ii]?.[j + jj] === 1)
-    .length;
+  relativeNeighbours.filter(([ii, jj]) => arr[i + ii]?.[j + jj] === 1).length;
 
 const computeNextGeneration = (arr, i, j) => {
   const numberOfLivingNeighbours = countAliveNeighbours(arr, i, j);
@@ -28,12 +27,11 @@ const computeNextGeneration = (arr, i, j) => {
 
 const gameOfLife = (arr) => {
   let result = [];
-
   for (let i = 0; i < arr.length; i++) {
     result[i] = [];
 
-    for (let j = 0; j < arr[i].length; j++) {
-      result[i].push(computeNextGeneration(arr, i, j));
+    for (let j = 0; j < arr.length; j++) {
+      result[i][j] = computeNextGeneration(arr, i, j);
     }
   }
 

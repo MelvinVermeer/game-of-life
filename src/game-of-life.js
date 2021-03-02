@@ -1,17 +1,17 @@
-const countAliveNeighbours = (arr, i, j) => {
-  const directions = [
-    [i - 1, j - 1],
-    [i, j - 1],
-    [i + 1, j - 1],
-    [i - 1, j],
-    [i + 1, j],
-    [i - 1, j + 1],
-    [i, j + 1],
-    [i + 1, j + 1],
-  ];
+const relativeNeighbours = [
+  [-1, -1],
+  [0, -1],
+  [1, -1],
+  [-1, 0],
+  [1, 0],
+  [-1, 1],
+  [0, 1],
+  [1, 1],
+];
 
-  return directions.filter(([newI, newJ]) => arr[newI]?.[newJ] === 1).length;
-};
+const countAliveNeighbours = (arr, i, j) =>
+  relativeNeighbours.filter(([ii, jj]) => arr[i + ii]?.[j + jj] === 1)
+    .length;
 
 const computeNextGeneration = (arr, i, j) => {
   const numberOfLivingNeighbours = countAliveNeighbours(arr, i, j);

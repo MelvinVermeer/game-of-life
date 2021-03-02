@@ -10,13 +10,34 @@ const countAliveNeighbours = (arr, i, j) => {
     [i + 1, j + 1],
   ];
 
+  return directions.filter(
+    ([newI, newJ]) =>
+      newI > -1 &&
+      newI < arr.length &&
+      newI > -1 &&
+      newJ < arr.length &&
+      arr[newI][newJ] === 1
+  ).length;
+};
 
-  return directions.filter(([newI, newJ]) => 
-        newI > -1 && 
-        newI < arr.length && 
-        newI > -1 && 
-        newJ < arr.length && 
-        arr[newI][newJ] === 1).length;
+const computeNextGeneration = (arr, i, j) => {
+  const numberOfLivingNeighbours = countAliveNeighbours(arr, i, j);
+
+  if (arr[i][j] === 1) {
+    if (numberOfLivingNeighbours < 2 || numberOfLivingNeighbours > 3) {
+      return 0;
+    }
+
+    if (numberOfLivingNeighbours === 2 || numberOfLivingNeighbours === 3) {
+      return 1;
+    }
+  } else {
+    if (numberOfLivingNeighbours === 3) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
 };
 
 const gameOfLife = (arr) => {
@@ -26,23 +47,7 @@ const gameOfLife = (arr) => {
     result[i] = [];
 
     for (let j = 0; j < arr[i].length; j++) {
-      const numberOfLivingNeighbours = countAliveNeighbours(arr, i, j);
-
-      if (arr[i][j] === 1) {
-        if (numberOfLivingNeighbours < 2 || numberOfLivingNeighbours > 3) {
-          result[i].push(0);
-        }
-
-        if (numberOfLivingNeighbours === 2 || numberOfLivingNeighbours === 3) {
-          result[i].push(1);
-        }
-      } else {
-        if (numberOfLivingNeighbours === 3) {
-            result[i].push(1);
-        } else {
-            result[i].push(0);
-        }
-      }
+      result[i].push(computeNextGeneration(arr, i, j));
     }
   }
 

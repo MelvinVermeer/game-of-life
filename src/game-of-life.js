@@ -10,14 +10,7 @@ const countAliveNeighbours = (arr, i, j) => {
     [i + 1, j + 1],
   ];
 
-  return directions.filter(
-    ([newI, newJ]) =>
-      newI > -1 &&
-      newI < arr.length &&
-      newI > -1 &&
-      newJ < arr.length &&
-      arr[newI][newJ] === 1
-  ).length;
+  return directions.filter(([newI, newJ]) => arr[newI]?.[newJ] === 1).length;
 };
 
 const computeNextGeneration = (arr, i, j) => {
